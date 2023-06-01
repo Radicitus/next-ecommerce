@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import Product from "@/app/components/Product";
+import { Analytics } from "@vercel/analytics/react";
 
 const getProducts = async () => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
@@ -33,6 +34,7 @@ export default async function Home() {
       {products.map((product) => (
         <Product {...product} />
       ))}
+      <Analytics />
     </main>
   );
 }
