@@ -22,8 +22,8 @@ export default function Nav({ user }: Session) {
             <Image
               src={user?.image as string}
               alt={user?.name as string}
-              width={48}
-              height={48}
+              width={40}
+              height={40}
               className="rounded-full"
             ></Image>
           </li>
