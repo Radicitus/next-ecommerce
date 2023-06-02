@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SearchParamType } from "@/types/SearchParamType";
+import formatPrice from "@/util/FormatPrice";
 
 export default async function Product({ searchParams }: SearchParamType) {
   return (
@@ -11,7 +12,11 @@ export default async function Product({ searchParams }: SearchParamType) {
         height={600}
       />
       <h1>{searchParams.name}</h1>
-      <p>{searchParams.unit_amount}</p>
+      <p>
+        {searchParams.unit_amount
+          ? formatPrice(searchParams.unit_amount)
+          : "Free!"}
+      </p>
     </div>
   );
 }
