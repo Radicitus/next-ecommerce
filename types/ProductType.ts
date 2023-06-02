@@ -1,5 +1,13 @@
+type MetadataType = {
+  features: string;
+};
+
 export type ProductType = {
   name: string;
   image: string;
-  price: number | null;
+  unit_amount: number | null;
+  quantity?: number | 1;
+  id: string;
+  description: string | null;
+  metadata: MetadataType;
 };

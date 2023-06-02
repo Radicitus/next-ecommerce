@@ -1,8 +1,8 @@
-const formatPrice = (price: number) => {
+const formatPrice = (unit_amount: number) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  }).format(price / 100);
+  }).format(unit_amount / 100);
 };
 
 export default formatPrice;
