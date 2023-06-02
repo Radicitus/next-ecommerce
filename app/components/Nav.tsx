@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function Nav({ user }: Session) {
   return (
     <nav className="flex justify-between items-center py-8">
-      <h1>Styled</h1>
+      <h1>Cam.Shop</h1>
       <ul className="flex items-center gap-12">
         {/* If the user is not signed in */}
         {!user && (
