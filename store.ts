@@ -26,7 +26,10 @@ export const useCartStore = create<CartState>()(
           if (existingItem) {
             const updatedCart = state.cart.map((cartItem) => {
               if (cartItem.id === item.id) {
-                return { ...cartItem, quantity: cartItem.quantity + 1 };
+                return {
+                  ...cartItem,
+                  quantity: (cartItem.quantity as number) + 1,
+                };
               }
               return cartItem;
             });
