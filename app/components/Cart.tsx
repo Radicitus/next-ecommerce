@@ -5,6 +5,7 @@ import { useCartStore } from "@/store";
 import formatPrice from "@/util/FormatPrice";
 import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
 import ShoppingBasket from "@/public/shopping-basket.png";
+import { motion } from "framer-motion";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -15,7 +16,10 @@ export default function Cart() {
   }, 0);
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       onClick={() => cartStore.toggleCart()}
       className="fixed w-full h-screen left-0 top-0 bg-black/25"
     >
@@ -91,6 +95,6 @@ export default function Cart() {
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
