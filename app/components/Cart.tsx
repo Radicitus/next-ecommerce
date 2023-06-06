@@ -8,7 +8,12 @@ import ShoppingBasket from "@/public/shopping-basket.png";
 
 export default function Cart() {
   const cartStore = useCartStore();
-  console.log(cartStore.isOpen);
+
+  // Calculate total price of all items in cart
+  const totalPrice = cartStore.cart.reduce((acc, item) => {
+    return acc + item.unit_amount! * item.quantity!;
+  }, 0);
+
   return (
     <div
       onClick={() => cartStore.toggleCart()}
@@ -68,9 +73,12 @@ export default function Cart() {
         ))}
 
         {cartStore.cart.length > 0 ? (
-          <button className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white">
-            Checkout
-          </button>
+          <div>
+            <p>Total: {totalPrice ? formatPrice(totalPrice) : "$0.00"}</p>
+            <button className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white">
+              Checkout
+            </button>
+          </div>
         ) : (
           <div className="flex flex-col items-center gap-12 text-2xl font-medium pt-56 opacity-75">
             <h1>Uh oh...it's empty 🥲</h1>
