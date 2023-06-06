@@ -37,7 +37,7 @@ export default function Cart() {
         {cartStore.cart.map((item) => (
           <motion.div layout key={item.id} className="flex py-4 gap-4">
             <Image
-              className="rounded-md h-24 object-cover"
+              className="rounded-md h-3/5 object-cover"
               src={item.image}
               alt={item.name}
               width={120}
