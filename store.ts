@@ -8,6 +8,10 @@ type CartState = {
   toggleCart: () => void;
   addProduct: (item: AddCartType) => void;
   removeProduct: (item: AddCartType) => void;
+  paymentIntent: string;
+  setPaymentIntent: (paymentIntent: string) => void;
+  onCheckout: string;
+  setCheckout: (cartState: string) => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -15,6 +19,8 @@ export const useCartStore = create<CartState>()(
     (set) => ({
       cart: [],
       isOpen: false,
+      paymentIntent: "",
+      onCheckout: "cart",
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
       addProduct: (item) =>
         set((state) => {
@@ -74,6 +80,9 @@ export const useCartStore = create<CartState>()(
             return { cart: filteredCart };
           }
         }),
+      setPaymentIntent: (paymentIntent) =>
+        set((state) => ({ paymentIntent: paymentIntent })),
+      setCheckout: (cartState) => set((state) => ({ onCheckout: cartState })),
     }),
     { name: "cart-store" }
   )
