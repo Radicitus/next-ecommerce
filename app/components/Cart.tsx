@@ -29,7 +29,7 @@ export default function Cart() {
       >
         <h1>Shopping Cart</h1>
         {cartStore.cart.map((item) => (
-          <div className="flex py-4 gap-4">
+          <motion.div layout key={item.id} className="flex py-4 gap-4">
             <Image
               className="rounded-md h-24 object-cover"
               src={item.image}
@@ -73,17 +73,17 @@ export default function Cart() {
                 {item.unit_amount ? formatPrice(item.unit_amount) : "Free!"}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
 
         {cartStore.cart.length > 0 ? (
           //   If the cart is not empty
-          <div>
+          <motion.div layout>
             <p>Total: {totalPrice ? formatPrice(totalPrice) : "$0.00"}</p>
             <button className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white">
               Checkout
             </button>
-          </div>
+          </motion.div>
         ) : (
           //   If the cart is empty
           <AnimatePresence>
