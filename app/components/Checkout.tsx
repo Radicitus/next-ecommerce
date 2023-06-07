@@ -4,12 +4,14 @@ import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { useCartStore } from "@/store";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUB_KEY!);
 
 export default function Checkout() {
   const cartStore = useCartStore();
   const [clientSecret, setClientSecret] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     // Create a payment intent as soon as page loads
@@ -22,6 +24,24 @@ export default function Checkout() {
         items: cartStore.cart,
         payment_intent_id: cartStore.paymentIntent,
       }),
-    });
+    })
+      .then((res) => {
+        // Return user to login screen if not logged in
+        if (res.status === 403) {
+          return router.push("/api/auth/signin");
+        }
+
+        // Else return data
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
   }, []);
+
+  return (
+    <div>
+      <h1>Checkout</h1>
+    </div>
+  );
 }

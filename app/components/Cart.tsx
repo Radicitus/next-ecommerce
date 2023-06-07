@@ -6,6 +6,7 @@ import formatPrice from "@/util/FormatPrice";
 import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
 import ShoppingBasket from "@/public/shopping-basket.png";
 import { AnimatePresence, motion } from "framer-motion";
+import Checkout from "@/app/components/Checkout";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -34,59 +35,69 @@ export default function Cart() {
         >
           Back to store 🏃
         </button>
-        {cartStore.cart.map((item) => (
-          <motion.div layout key={item.id} className="flex py-4 gap-4">
-            <Image
-              className="rounded-md h-3/5 object-cover"
-              src={item.image}
-              alt={item.name}
-              width={120}
-              height={120}
-            />
-            <div>
-              <h2>{item.name}</h2>
-              <div className="flex gap-2">
-                <h2>Quantity: {item.quantity}</h2>
-                <button
-                  onClick={() =>
-                    cartStore.removeProduct({
-                      id: item.id,
-                      name: item.name,
-                      unit_amount: item.unit_amount,
-                      image: item.image,
-                      quantity: item.quantity,
-                    })
-                  }
-                >
-                  <IoRemoveCircle />
-                </button>
-                <button
-                  onClick={() =>
-                    cartStore.addProduct({
-                      id: item.id,
-                      name: item.name,
-                      unit_amount: item.unit_amount,
-                      image: item.image,
-                      quantity: item.quantity,
-                    })
-                  }
-                >
-                  <IoAddCircle />
-                </button>
-              </div>
 
-              <p className="text-sm text-teal-700">
-                {item.unit_amount ? formatPrice(item.unit_amount) : "Free!"}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+        {/* CART ITEMS */}
+        {cartStore.onCheckout === "cart" && (
+          <>
+            {cartStore.cart.map((item) => (
+              <motion.div layout key={item.id} className="flex py-4 gap-4">
+                <Image
+                  className="rounded-md h-3/5 object-cover"
+                  src={item.image}
+                  alt={item.name}
+                  width={120}
+                  height={120}
+                />
+                <div>
+                  <h2>{item.name}</h2>
+                  <div className="flex gap-2">
+                    <h2>Quantity: {item.quantity}</h2>
+                    <button
+                      onClick={() =>
+                        cartStore.removeProduct({
+                          id: item.id,
+                          name: item.name,
+                          unit_amount: item.unit_amount,
+                          image: item.image,
+                          quantity: item.quantity,
+                        })
+                      }
+                    >
+                      <IoRemoveCircle />
+                    </button>
+                    <button
+                      onClick={() =>
+                        cartStore.addProduct({
+                          id: item.id,
+                          name: item.name,
+                          unit_amount: item.unit_amount,
+                          image: item.image,
+                          quantity: item.quantity,
+                        })
+                      }
+                    >
+                      <IoAddCircle />
+                    </button>
+                  </div>
 
+                  <p className="text-sm text-teal-700">
+                    {item.unit_amount ? formatPrice(item.unit_amount) : "Free!"}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </>
+        )}
+
+        {/* CHECKOUT AND TOTAL */}
         {cartStore.cart.length > 0 ? (
           //   If the cart is not empty
           <motion.div layout>
             <p>Total: {totalPrice ? formatPrice(totalPrice) : "$0.00"}</p>
-            <button className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white">
+            <button
+              onClick={() => cartStore.setCheckout("checkout")}
+              className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white"
+            >
               Checkout
             </button>
           </motion.div>
@@ -109,6 +120,9 @@ export default function Cart() {
             </motion.div>
           </AnimatePresence>
         )}
+
+        {/* CHECKOUT FORM */}
+        {cartStore.onCheckout === "checkout" && <Checkout />}
       </motion.div>
     </motion.div>
   );
