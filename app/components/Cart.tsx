@@ -29,12 +29,22 @@ export default function Cart() {
         onClick={(e) => e.stopPropagation()}
         className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll text-gray-700 w-full lg:w-2/5"
       >
-        <button
-          onClick={() => cartStore.toggleCart()}
-          className="text-sm font-bold pb-12"
-        >
-          Back to store 🏃
-        </button>
+        {/* Render different button depending on onCheckout state */}
+        {cartStore.onCheckout === "cart" ? (
+          <button
+            onClick={() => cartStore.toggleCart()}
+            className="text-sm font-bold pb-12"
+          >
+            Back to store 🏪
+          </button>
+        ) : (
+          <button
+            onClick={() => cartStore.setCheckout("cart")}
+            className="text-sm font-bold pb-12"
+          >
+            Back to cart 🛒
+          </button>
+        )}
 
         {/* CART ITEMS */}
         {/* Displays when onCheckout is in cart, otherwise doesn't render */}
