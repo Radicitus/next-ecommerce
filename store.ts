@@ -23,7 +23,7 @@ export const useCartStore = create<CartState>()(
       paymentIntent: "",
       onCheckout: "cart",
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
-      clearCart: () => set((state) => ({ cart: [] })),
+      clearCart: () => set({ cart: [] }),
       addProduct: (item) =>
         set((state) => {
           // Check if item is already in cart
@@ -83,8 +83,8 @@ export const useCartStore = create<CartState>()(
           }
         }),
       setPaymentIntent: (paymentIntent) =>
-        set((state) => ({ paymentIntent: paymentIntent })),
-      setCheckout: (cartState) => set((state) => ({ onCheckout: cartState })),
+        set({ paymentIntent: paymentIntent }),
+      setCheckout: (cartState) => set({ onCheckout: cartState }),
     }),
     { name: "cart-store" }
   )
