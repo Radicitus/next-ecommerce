@@ -7,6 +7,7 @@ import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
 import ShoppingBasket from "@/public/shopping-basket.png";
 import { AnimatePresence, motion } from "framer-motion";
 import Checkout from "@/app/components/Checkout";
+import OrderConfirmed from "@/app/components/OrderConfirmed";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -133,8 +134,12 @@ export default function Cart() {
         )}
 
         {/* CHECKOUT FORM */}
-        {/* Renders only when onCheckout is set to checkout */}
+        {/* Renders only when onCheckout is set to 'checkout' */}
         {cartStore.onCheckout === "checkout" && <Checkout />}
+
+        {/* SUCCESS PAGE */}
+        {/* Renders only when onCheckout is set to 'success' */}
+        {cartStore.onCheckout === "success" && <OrderConfirmed />}
       </motion.div>
     </motion.div>
   );
