@@ -16,7 +16,6 @@ export const authOptions: NextAuthOptions = {
   ],
   events: {
     createUser: async ({ user }) => {
-      console.log("createUser: ", user);
       const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
         apiVersion: "2022-11-15",
       });

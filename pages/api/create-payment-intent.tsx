@@ -97,8 +97,6 @@ export default async function handler(
         },
       });
 
-      console.log(updatedOrder);
-
       return res.status(200).json({
         message: "Updated existing order",
         paymentIntent: updatedIntent,
@@ -122,8 +120,6 @@ export default async function handler(
     const newOrder = await prisma.order.create({
       data: orderData,
     });
-
-    console.log(newOrder);
 
     return res.status(200).json({
       message: "Created new order",
