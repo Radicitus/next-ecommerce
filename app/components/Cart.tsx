@@ -37,6 +37,7 @@ export default function Cart() {
         </button>
 
         {/* CART ITEMS */}
+        {/* Displays when onCheckout is in cart, otherwise doesn't render */}
         {cartStore.onCheckout === "cart" && (
           <>
             {cartStore.cart.map((item) => (
@@ -86,42 +87,43 @@ export default function Cart() {
                 </div>
               </motion.div>
             ))}
+
+            {/* CHECKOUT AND TOTAL */}
+            {cartStore.cart.length > 0 ? (
+              //   If the cart is not empty
+              <motion.div layout>
+                <p>Total: {totalPrice ? formatPrice(totalPrice) : "$0.00"}</p>
+                <button
+                  onClick={() => cartStore.setCheckout("checkout")}
+                  className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white"
+                >
+                  Checkout
+                </button>
+              </motion.div>
+            ) : (
+              //   If the cart is empty
+              <AnimatePresence>
+                <motion.div
+                  animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
+                  initial={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
+                  exit={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
+                  className="flex flex-col items-center gap-12 text-2xl font-medium pt-56 opacity-75"
+                >
+                  <h1>Uh oh...it's empty 🥲</h1>
+                  <Image
+                    src={ShoppingBasket}
+                    alt="empty cart"
+                    width={200}
+                    height={200}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            )}
           </>
         )}
 
-        {/* CHECKOUT AND TOTAL */}
-        {cartStore.cart.length > 0 ? (
-          //   If the cart is not empty
-          <motion.div layout>
-            <p>Total: {totalPrice ? formatPrice(totalPrice) : "$0.00"}</p>
-            <button
-              onClick={() => cartStore.setCheckout("checkout")}
-              className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white"
-            >
-              Checkout
-            </button>
-          </motion.div>
-        ) : (
-          //   If the cart is empty
-          <AnimatePresence>
-            <motion.div
-              animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
-              initial={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
-              exit={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
-              className="flex flex-col items-center gap-12 text-2xl font-medium pt-56 opacity-75"
-            >
-              <h1>Uh oh...it's empty 🥲</h1>
-              <Image
-                src={ShoppingBasket}
-                alt="empty cart"
-                width={200}
-                height={200}
-              />
-            </motion.div>
-          </AnimatePresence>
-        )}
-
         {/* CHECKOUT FORM */}
+        {/* Renders only when onCheckout is set to checkout */}
         {cartStore.onCheckout === "checkout" && <Checkout />}
       </motion.div>
     </motion.div>
