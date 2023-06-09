@@ -4,6 +4,8 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import formatPrice from "@/util/FormatPrice";
 import Image from "next/image";
 
+export const revalidate = 0;
+
 const fetchOrders = async () => {
   const prisma = new PrismaClient();
   const user = await getServerSession(authOptions);
@@ -19,6 +21,7 @@ const fetchOrders = async () => {
       // @ts-ignore
       // Errors due to manual overloading of userSession type
       userId: user?.user?.id,
+      status: "complete",
     },
     include: {
       products: true,
@@ -28,7 +31,6 @@ const fetchOrders = async () => {
 
 export default async function Dashboard() {
   const orders = await fetchOrders();
-  console.log(orders);
 
   if (orders === null) {
     return <h1>Not Logged In</h1>;
@@ -43,10 +45,12 @@ export default async function Dashboard() {
       <h1>Your Orders</h1>
       <div className="font-medium">
         {orders.map((order) => (
-          <div key={order.id} className="rounded-lg">
-            <h2>Order Reference: {order.id}</h2>
-            <p>Time: {order.createdAt.toTimeString()}</p>
-            <p className="font-medium py-2">
+          <div
+            key={order.id}
+            className="rounded-lg p-6 mb-6 w-fit hover:scale-105 hover:shadow-2xl"
+          >
+            <h2 className="text-xs font-medium">Order Reference: {order.id}</h2>
+            <p className="text-xs py-2">
               Status:{" "}
               <span
                 className={`${
@@ -56,17 +60,19 @@ export default async function Dashboard() {
                 {order.status}
               </span>
             </p>
-            <p className="font-medium">Total: {formatPrice(order.amount)}</p>
-            <div className="flex gap-8">
+            <p className="text-xs">Time: {order.createdAt.toDateString()}</p>
+
+            <div className="text-sm lg:flex">
               {order.products.map((product) => (
-                <div key={product.id} className="py-2">
-                  <h2>{product.name}</h2>
+                <div key={product.id} className="py-2 lg:mr-3">
+                  <h2 className="py-2">{product.name}</h2>
                   <div className="flex items-center gap-4">
                     <Image
                       src={product.image!}
                       width={36}
                       height={36}
                       alt={product.name}
+                      className="rounded-md"
                     />
                     <p>{formatPrice(product.unit_amount)}</p>
                     <p>Quantity: {product.quantity}</p>
@@ -74,6 +80,8 @@ export default async function Dashboard() {
                 </div>
               ))}
             </div>
+
+            <p>Total: {formatPrice(order.amount)}</p>
           </div>
         ))}
       </div>
