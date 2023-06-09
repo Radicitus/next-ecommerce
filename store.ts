@@ -6,8 +6,13 @@ type CartState = {
   isOpen: boolean;
   cart: AddCartType[];
   toggleCart: () => void;
+  clearCart: () => void;
   addProduct: (item: AddCartType) => void;
   removeProduct: (item: AddCartType) => void;
+  paymentIntent: string;
+  setPaymentIntent: (paymentIntent: string) => void;
+  onCheckout: string;
+  setCheckout: (cartState: string) => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -15,7 +20,10 @@ export const useCartStore = create<CartState>()(
     (set) => ({
       cart: [],
       isOpen: false,
+      paymentIntent: "",
+      onCheckout: "cart",
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
+      clearCart: () => set({ cart: [] }),
       addProduct: (item) =>
         set((state) => {
           // Check if item is already in cart
@@ -74,6 +82,9 @@ export const useCartStore = create<CartState>()(
             return { cart: filteredCart };
           }
         }),
+      setPaymentIntent: (paymentIntent) =>
+        set({ paymentIntent: paymentIntent }),
+      setCheckout: (cartState) => set({ onCheckout: cartState }),
     }),
     { name: "cart-store" }
   )
