@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import formatPrice from "@/util/FormatPrice";
+import Image from "next/image";
 
 const fetchOrders = async () => {
   const prisma = new PrismaClient();
@@ -44,6 +46,34 @@ export default async function Dashboard() {
           <div key={order.id} className="rounded-lg">
             <h2>Order Reference: {order.id}</h2>
             <p>Time: {order.createdAt.toTimeString()}</p>
+            <p className="font-medium py-2">
+              Status:{" "}
+              <span
+                className={`${
+                  order.status === "complete" ? "bg-teal-500" : "bg-orange-500"
+                } text-white py-1 rounded-md px-2 mx-2 text-sm`}
+              >
+                {order.status}
+              </span>
+            </p>
+            <p className="font-medium">Total: {formatPrice(order.amount)}</p>
+            <div className="flex gap-8">
+              {order.products.map((product) => (
+                <div key={product.id} className="py-2">
+                  <h2>{product.name}</h2>
+                  <div className="flex items-center gap-4">
+                    <Image
+                      src={product.image!}
+                      width={36}
+                      height={36}
+                      alt={product.name}
+                    />
+                    <p>{formatPrice(product.unit_amount)}</p>
+                    <p>Quantity: {product.quantity}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
