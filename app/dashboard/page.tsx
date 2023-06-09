@@ -21,6 +21,7 @@ const fetchOrders = async () => {
       // @ts-ignore
       // Errors due to manual overloading of userSession type
       userId: user?.user?.id,
+      status: "complete",
     },
     include: {
       products: true,
