@@ -13,7 +13,7 @@ export default function AddCart({ name, image, id, unit_amount }: AddCartType) {
     setAdded(true);
     setTimeout(() => {
       setAdded(false);
-    }, 1000);
+    }, 800);
   };
 
   return (
@@ -21,7 +21,7 @@ export default function AddCart({ name, image, id, unit_amount }: AddCartType) {
       <button
         onClick={handleAddToCart}
         disabled={added}
-        className="my-4 btn btn-primary w-full"
+        className="my-4 w-full btn btn-primary"
       >
         {!added ? "Add to Cart" : "Added!"}
       </button>
