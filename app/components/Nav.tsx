@@ -12,7 +12,6 @@ import DarkLight from "@/app/components/DarkLight";
 
 export default function Nav({ user }: Session) {
   const cartStore = useCartStore();
-  const body = document.body;
 
   return (
     <nav className="flex justify-between items-center py-12">
@@ -23,9 +22,6 @@ export default function Nav({ user }: Session) {
         {/* Toggle the cart */}
         <li
           onClick={() => {
-            // Hide overflow when cart is open to prevent body scrolling
-            body.style.overflow = "hidden";
-
             cartStore.toggleCart();
           }}
           className="flex items-center text-3xl relative cursor-pointer"
@@ -84,7 +80,7 @@ export default function Nav({ user }: Session) {
                   Orders
                 </Link>
                 <li
-                  className="hover:bg-base-300 p-4 rounded-md font-semibold"
+                  className="hover:bg-base-300 p-4 rounded-md font-semibold cursor-pointer"
                   onClick={() => {
                     signOut();
                     if (document.activeElement instanceof HTMLElement) {
