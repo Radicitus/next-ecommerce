@@ -10,5 +10,15 @@ export default function Hydrate({ children }: { children: ReactNode }) {
     setIsHydrated(true);
   }, []);
 
-  return <>{isHydrated ? <>{children}</> : <div>Loading...</div>}</>;
+  return (
+    <>
+      {isHydrated ? (
+        <>{children}</>
+      ) : (
+        <div className="h-full flex justify-center content-center">
+          <span className="loading loading-ring loading-lg"></span>
+        </div>
+      )}
+    </>
+  );
 }
