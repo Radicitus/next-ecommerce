@@ -12,6 +12,7 @@ import { useState } from "react";
 
 export default function Cart() {
   const cartStore = useCartStore();
+  const body = document.body;
 
   // Calculate total price of all items in cart
   const totalPrice = cartStore.cart.reduce((acc, item) => {
@@ -33,6 +34,8 @@ export default function Cart() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={() => {
+        // Show overflow when cart is closed to allow scrolling
+        body.style.overflow = "auto";
         cartStore.toggleCart();
         setTimeout(() => {
           cartStore.setCheckout("cart");
@@ -43,13 +46,16 @@ export default function Cart() {
       <motion.div
         layout
         onClick={(e) => e.stopPropagation()}
-        className="bg-base-100 absolute right-0 top-0 h-screen p-12 overflow-y-scroll w-full
+        className="bg-base-100 absolute right-0 top-0 h-screen p-12 w-full overflow-y-scroll
         md:w-6/12 lg:w-5/12 xl:w-4/12 2xl:w-2/12"
       >
         {/* Render different button depending on onCheckout state */}
         {cartStore.onCheckout === "cart" ? (
           <button
-            onClick={() => cartStore.toggleCart()}
+            onClick={() => {
+              body.style.overflow = "auto";
+              cartStore.toggleCart();
+            }}
             className="text-sm font-bold pb-12"
           >
             Back to store 🏪
@@ -72,7 +78,7 @@ export default function Cart() {
                 layout
                 key={item.id}
                 className="flex p-4 my-4 gap-4 bg-base-200 rounded-lg
-                hover:bg-primary-content hover:shadow-2xl hover:text-primary
+                md:hover:bg-primary-content md:hover:shadow-2xl md:hover:text-primary
                 transition duration-300 ease-in-out"
               >
                 <Image
@@ -96,7 +102,7 @@ export default function Cart() {
                           quantity: item.quantity,
                         })
                       }
-                      className="hover:text-secondary transition duration-300 ease-in-out"
+                      className="md:hover:text-secondary transition duration-300 ease-in-out"
                     >
                       <IoRemoveCircle />
                     </button>
@@ -110,7 +116,7 @@ export default function Cart() {
                           quantity: item.quantity,
                         })
                       }
-                      className="hover:text-secondary transition duration-300 ease-in-out"
+                      className="md:hover:text-secondary transition duration-300 ease-in-out"
                     >
                       <IoAddCircle />
                     </button>

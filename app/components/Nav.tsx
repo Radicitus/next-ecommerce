@@ -12,6 +12,7 @@ import DarkLight from "@/app/components/DarkLight";
 
 export default function Nav({ user }: Session) {
   const cartStore = useCartStore();
+  const body = document.body;
 
   return (
     <nav className="flex justify-between items-center py-12">
@@ -21,7 +22,12 @@ export default function Nav({ user }: Session) {
       <ul className="flex items-center gap-8">
         {/* Toggle the cart */}
         <li
-          onClick={() => cartStore.toggleCart()}
+          onClick={() => {
+            // Hide overflow when cart is open to prevent body scrolling
+            body.style.overflow = "hidden";
+
+            cartStore.toggleCart();
+          }}
           className="flex items-center text-3xl relative cursor-pointer"
         >
           <AiFillShopping />

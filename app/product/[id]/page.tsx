@@ -5,7 +5,7 @@ import AddCart from "@/app/product/[id]/AddCart";
 
 export default async function Product({ searchParams }: SearchParamType) {
   return (
-    <div className="flex flex-col 2xl:flex-row items-center justify-center gap-16 md:gap-x-48">
+    <div className="flex flex-col 2xl:flex-row items-center justify-center gap-16 md:gap-x-48 pb-10">
       <Image
         src={searchParams.image}
         alt={searchParams.name}
