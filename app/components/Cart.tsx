@@ -8,6 +8,7 @@ import ShoppingBasket from "@/public/shopping-basket.png";
 import { AnimatePresence, motion } from "framer-motion";
 import Checkout from "@/app/components/Checkout";
 import OrderConfirmed from "@/app/components/OrderConfirmed";
+import { useState } from "react";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -16,6 +17,15 @@ export default function Cart() {
   const totalPrice = cartStore.cart.reduce((acc, item) => {
     return acc + item.unit_amount! * item.quantity!;
   }, 0);
+
+  const [processing, setProcessing] = useState(false);
+  const handleCheckout = async () => {
+    setProcessing(true);
+    setTimeout(() => {
+      cartStore.setCheckout("checkout");
+      setProcessing(false);
+    }, 800);
+  };
 
   return (
     <motion.div
@@ -28,7 +38,8 @@ export default function Cart() {
       <motion.div
         layout
         onClick={(e) => e.stopPropagation()}
-        className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll text-gray-700 w-full lg:w-2/5"
+        className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll w-full
+        md:w-6/12 lg:w-5/12 xl:w-4/12 2xl:w-2/12"
       >
         {/* Render different button depending on onCheckout state */}
         {cartStore.onCheckout === "cart" ? (
@@ -92,7 +103,7 @@ export default function Cart() {
                     </button>
                   </div>
 
-                  <p className="text-sm text-teal-700">
+                  <p className="text-sm text-primary">
                     {item.unit_amount ? formatPrice(item.unit_amount) : "Free!"}
                   </p>
                 </div>
@@ -105,10 +116,11 @@ export default function Cart() {
               <motion.div layout>
                 <p>Total: {totalPrice ? formatPrice(totalPrice) : "$0.00"}</p>
                 <button
-                  onClick={() => cartStore.setCheckout("checkout")}
-                  className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white"
+                  onClick={handleCheckout}
+                  disabled={processing}
+                  className="py-2 mt-4 w-full btn btn-primary"
                 >
-                  Checkout
+                  {processing ? "Processing..." : "Checkout"}
                 </button>
               </motion.div>
             ) : (
@@ -118,9 +130,9 @@ export default function Cart() {
                   animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
                   initial={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
                   exit={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
-                  className="flex flex-col items-center gap-12 text-2xl font-medium pt-56 opacity-75"
+                  className="flex flex-col items-center gap-12 text-2xl font-medium pt-36 opacity-75"
                 >
-                  <h1>Uh oh...it's empty 🥲</h1>
+                  <h1>Nothing to see here...</h1>
                   <Image
                     src={ShoppingBasket}
                     alt="empty cart"
