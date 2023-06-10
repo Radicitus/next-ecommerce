@@ -1,9 +1,16 @@
 "use client";
 
 import { useThemeStore } from "@/store";
+import { useEffect } from "react";
 
 export default function DarkLight() {
   const themeStore = useThemeStore();
+
+  useEffect(() => {
+    document
+      .querySelector("html")!
+      .setAttribute("data-theme", themeStore.theme);
+  }, [themeStore.theme]);
 
   return (
     <label className="swap swap-rotate">
