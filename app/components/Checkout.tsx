@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import CheckoutForm from "@/app/components/CheckoutForm";
 import OrderAnimation from "@/app/components/OrderAnimation";
 import { motion } from "framer-motion";
+import { useThemeStore } from "@/store";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUB_KEY!);
 
@@ -15,6 +16,7 @@ export default function Checkout() {
   const cartStore = useCartStore();
   const [clientSecret, setClientSecret] = useState("");
   const router = useRouter();
+  const themeStore = useThemeStore();
 
   useEffect(() => {
     // Create a payment intent as soon as page loads
@@ -46,7 +48,7 @@ export default function Checkout() {
   const options: StripeElementsOptions = {
     clientSecret,
     appearance: {
-      theme: "stripe",
+      theme: themeStore.theme === "dark" ? "night" : "stripe",
       labels: "floating",
     },
   };
