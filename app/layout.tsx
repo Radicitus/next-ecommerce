@@ -31,7 +31,11 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="en" data-theme="light" className="h-full">
+    <html
+      lang="en"
+      data-theme="light"
+      className="h-full transition duration-700"
+    >
       <head>
         <link rel="icon" href="/favicon.ico" />
         <title>Cam.Shop</title>
