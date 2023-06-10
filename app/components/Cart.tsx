@@ -32,7 +32,12 @@ export default function Cart() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={() => cartStore.toggleCart()}
+      onClick={() => {
+        cartStore.toggleCart();
+        setTimeout(() => {
+          cartStore.setCheckout("cart");
+        }, 300);
+      }}
       className="fixed w-full h-screen left-0 top-0 bg-black/25"
     >
       <motion.div
@@ -63,7 +68,13 @@ export default function Cart() {
         {cartStore.onCheckout === "cart" && (
           <>
             {cartStore.cart.map((item) => (
-              <motion.div layout key={item.id} className="flex py-4 gap-4">
+              <motion.div
+                layout
+                key={item.id}
+                className="flex p-4 my-4 gap-4 bg-base-200 rounded-lg
+                hover:bg-primary-content hover:shadow-2xl hover:text-primary
+                transition duration-300 ease-in-out"
+              >
                 <Image
                   className="rounded-md h-3/5 object-cover"
                   src={item.image}
@@ -85,6 +96,7 @@ export default function Cart() {
                           quantity: item.quantity,
                         })
                       }
+                      className="hover:text-secondary transition duration-300 ease-in-out"
                     >
                       <IoRemoveCircle />
                     </button>
@@ -98,6 +110,7 @@ export default function Cart() {
                           quantity: item.quantity,
                         })
                       }
+                      className="hover:text-secondary transition duration-300 ease-in-out"
                     >
                       <IoAddCircle />
                     </button>
