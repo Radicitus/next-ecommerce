@@ -8,6 +8,7 @@ import Cart from "@/app/components/Cart";
 import { useCartStore } from "@/store";
 import { AiFillShopping } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
+import DarkLight from "@/app/components/DarkLight";
 
 export default function Nav({ user }: Session) {
   const cartStore = useCartStore();
@@ -17,7 +18,7 @@ export default function Nav({ user }: Session) {
       <Link href={"/"}>
         <h1>Cam.Shop</h1>
       </Link>
-      <ul className="flex items-center gap-12">
+      <ul className="flex items-center gap-8">
         {/* Toggle the cart */}
         <li
           onClick={() => cartStore.toggleCart()}
@@ -37,6 +38,9 @@ export default function Nav({ user }: Session) {
             )}
           </AnimatePresence>
         </li>
+
+        {/* Dark Mode */}
+        <DarkLight />
 
         {/* If the user is not signed in */}
         {!user && (
