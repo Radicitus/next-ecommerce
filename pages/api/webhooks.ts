@@ -1,7 +1,7 @@
 import Stripe from "stripe";
-import { PrismaClient } from "@prisma/client";
 import { buffer } from "micro";
 import { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "@/util/prisma";
 
 export const config = {
   api: {
@@ -12,8 +12,6 @@ export const config = {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2022-11-15",
 });
-
-const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
