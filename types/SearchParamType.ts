@@ -7,6 +7,7 @@ type SearchParams = {
   unit_amount: number | null;
   image: string;
   id: string;
+  queryId?: string;
   description: string | null;
   features: string;
 };

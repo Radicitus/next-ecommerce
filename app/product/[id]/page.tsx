@@ -29,7 +29,7 @@ export default async function Product({ searchParams }: SearchParamType) {
         <AddCart
           name={searchParams.name}
           image={searchParams.image}
-          id={searchParams.id}
+          id={searchParams.queryId!}
           unit_amount={searchParams.unit_amount}
         />
       </div>
