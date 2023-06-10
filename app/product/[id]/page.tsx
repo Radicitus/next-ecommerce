@@ -12,6 +12,7 @@ export default async function Product({ searchParams }: SearchParamType) {
         width={600}
         height={600}
         className="w-full rounded-lg max-h-screen max-w-screen-sm object-cover"
+        priority={true}
       />
       <div className="font-medium">
         <h1 className="text-2xl py-2">{searchParams.name}</h1>
