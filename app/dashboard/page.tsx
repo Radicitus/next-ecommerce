@@ -47,7 +47,8 @@ export default async function Dashboard() {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="rounded-lg p-8 my-4 bg-base-200 hover:bg-white hover:scale-105 hover:shadow-2xl
+            className="rounded-lg p-8 my-4 bg-base-200
+            hover:bg-primary-content hover:scale-105 hover:shadow-2xl hover:text-primary
             transition duration-300 ease-in-out"
           >
             <h2 className="text-xs font-medium">Order Reference: {order.id}</h2>

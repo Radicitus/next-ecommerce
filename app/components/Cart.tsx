@@ -38,7 +38,7 @@ export default function Cart() {
       <motion.div
         layout
         onClick={(e) => e.stopPropagation()}
-        className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll w-full
+        className="bg-base-100 absolute right-0 top-0 h-screen p-12 overflow-y-scroll w-full
         md:w-6/12 lg:w-5/12 xl:w-4/12 2xl:w-2/12"
       >
         {/* Render different button depending on onCheckout state */}

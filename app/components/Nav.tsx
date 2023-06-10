@@ -16,7 +16,7 @@ export default function Nav({ user }: Session) {
   return (
     <nav className="flex justify-between items-center py-12">
       <Link href={"/"}>
-        <h1>Cam.Shop</h1>
+        <h1 className="font-extrabold">// Cam.Shop</h1>
       </Link>
       <ul className="flex items-center gap-8">
         {/* Toggle the cart */}
@@ -52,7 +52,7 @@ export default function Nav({ user }: Session) {
         {/* If the user is signed in */}
         {user && (
           <li>
-            <div className="dropdown dropdown-end cursor-pointer">
+            <div className="dropdown dropdown-bottom dropdown-hover">
               <Image
                 src={user?.image as string}
                 alt={user?.name as string}
@@ -63,7 +63,7 @@ export default function Nav({ user }: Session) {
               />
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-72"
+                className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-52"
               >
                 <Link
                   className="hover:bg-base-300 p-4 rounded-md"
