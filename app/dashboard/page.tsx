@@ -22,6 +22,9 @@ const fetchOrders = async () => {
       userId: user?.user?.id,
       status: "complete",
     },
+    orderBy: {
+      createdAt: "desc",
+    },
     include: {
       products: true,
     },

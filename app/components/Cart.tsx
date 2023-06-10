@@ -8,7 +8,7 @@ import ShoppingBasket from "@/public/shopping-basket.png";
 import { AnimatePresence, motion } from "framer-motion";
 import Checkout from "@/app/components/Checkout";
 import OrderConfirmed from "@/app/components/OrderConfirmed";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -28,14 +28,21 @@ export default function Cart() {
     }, 800);
   };
 
+  useEffect(() => {
+    // Hide overflow when cart is open to prevent body scrolling
+    if (cartStore.isOpen) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "auto";
+    }
+  }, [cartStore.isOpen]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={() => {
-        // Show overflow when cart is closed to allow scrolling
-        body.style.overflow = "auto";
         cartStore.toggleCart();
         setTimeout(() => {
           cartStore.setCheckout("cart");
@@ -53,7 +60,6 @@ export default function Cart() {
         {cartStore.onCheckout === "cart" ? (
           <button
             onClick={() => {
-              body.style.overflow = "auto";
               cartStore.toggleCart();
             }}
             className="text-sm font-bold pb-12"
