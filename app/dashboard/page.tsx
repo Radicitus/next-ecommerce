@@ -41,7 +41,7 @@ export default async function Dashboard() {
   }
 
   return (
-    <div>
+    <div className="pb-12">
       <h1>Your Orders</h1>
       <div className="font-medium">
         {orders.map((order) => (

@@ -16,7 +16,7 @@ export default function Nav({ user }: Session) {
   return (
     <nav className="flex justify-between items-center py-12">
       <Link href={"/"}>
-        <h1 className="font-extrabold">// Cam.Shop</h1>
+        <h1 className="font-extrabold text-lg">// Cam.Shop</h1>
       </Link>
       <ul className="flex items-center gap-8">
         {/* Toggle the cart */}
@@ -31,7 +31,8 @@ export default function Nav({ user }: Session) {
                 animate={{ scale: 1 }}
                 initial={{ scale: 0 }}
                 exit={{ scale: 0 }}
-                className="bg-primary text-white text-sm font-bold w-5 h-5 rounded-full absolute left-4 bottom-4 flex items-center justify-center"
+                className="bg-primary text-white text-sm font-bold w-5 h-5 rounded-full absolute left-4 bottom-4
+                flex items-center justify-center"
               >
                 {cartStore.cart.length}
               </motion.span>
@@ -52,7 +53,7 @@ export default function Nav({ user }: Session) {
         {/* If the user is signed in */}
         {user && (
           <li>
-            <div className="dropdown dropdown-bottom dropdown-hover">
+            <div className="dropdown dropdown-end dropdown-hover">
               <Image
                 src={user?.image as string}
                 alt={user?.name as string}
@@ -63,10 +64,10 @@ export default function Nav({ user }: Session) {
               />
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-32"
               >
                 <Link
-                  className="hover:bg-base-300 p-4 rounded-md"
+                  className="hover:bg-base-300 p-4 rounded-md font-semibold"
                   href={"/dashboard"}
                   onClick={() => {
                     if (document.activeElement instanceof HTMLElement) {
@@ -77,7 +78,7 @@ export default function Nav({ user }: Session) {
                   Orders
                 </Link>
                 <li
-                  className="hover:bg-base-300 p-4 rounded-md"
+                  className="hover:bg-base-300 p-4 rounded-md font-semibold"
                   onClick={() => {
                     signOut();
                     if (document.activeElement instanceof HTMLElement) {
