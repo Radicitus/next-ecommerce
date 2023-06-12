@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
+import { SessionProvider } from "next-auth/react";
 
 export default function Hydrate({ children }: { children: ReactNode }) {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -11,7 +12,7 @@ export default function Hydrate({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <>
+    <SessionProvider>
       {isHydrated ? (
         <>{children}</>
       ) : (
@@ -19,6 +20,6 @@ export default function Hydrate({ children }: { children: ReactNode }) {
           <span className="loading loading-ring loading-lg"></span>
         </div>
       )}
-    </>
+    </SessionProvider>
   );
 }

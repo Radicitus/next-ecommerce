@@ -1,6 +1,5 @@
 "use client";
 
-import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +8,11 @@ import { useCartStore } from "@/store";
 import { AiFillShopping } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import DarkLight from "@/app/components/DarkLight";
+import { useSession } from "next-auth/react";
 
-export default function Nav({ user }: Session) {
+export default function Nav() {
   const cartStore = useCartStore();
+  const { data: session, status } = useSession();
 
   return (
     <nav className="flex justify-between items-center py-12">
@@ -46,19 +47,19 @@ export default function Nav({ user }: Session) {
         <DarkLight />
 
         {/* If the user is not signed in */}
-        {!user && (
+        {!session?.user && (
           <li className="bg-primary text-white py-2 px-4 rounded-md">
             <button onClick={() => signIn()}>Sign In</button>
           </li>
         )}
 
         {/* If the user is signed in */}
-        {user && (
+        {session?.user && (
           <li>
             <div className="dropdown dropdown-end dropdown-hover">
               <Image
-                src={user?.image as string}
-                alt={user?.name as string}
+                src={session.user.image as string}
+                alt={session.user.name as string}
                 width={48}
                 height={48}
                 className="rounded-full"
