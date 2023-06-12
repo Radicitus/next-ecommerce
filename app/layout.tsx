@@ -1,7 +1,5 @@
 import "./globals.css";
 import Nav from "@/app/components/Nav";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Hydrate from "@/app/components/Hydrate";
 import { Roboto, Lobster_Two } from "next/font/google";
 
@@ -27,9 +25,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Fetch the user
-  const session = await getServerSession(authOptions);
-
   return (
     <html
       lang="en"
@@ -45,7 +40,7 @@ export default async function RootLayout({
         className={`mx-4 lg:mx-48 h-full ${roboto.variable} ${lobster.variable}`}
       >
         <Hydrate>
-          <Nav user={session?.user} expires={session?.expires as string} />
+          <Nav />
           {children}
         </Hydrate>
       </body>
