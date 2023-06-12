@@ -15,7 +15,12 @@ export default function Nav() {
   const { data: session, status } = useSession();
 
   return (
-    <nav className="flex justify-between items-center py-12">
+    <motion.nav
+      className="flex justify-between items-center py-12"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3 }}
+    >
       <Link href={"/"}>
         <h1 className="font-extrabold text-xl font-lobster">// Cam.Shop</h1>
       </Link>
@@ -97,6 +102,6 @@ export default function Nav() {
         )}
       </ul>
       <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

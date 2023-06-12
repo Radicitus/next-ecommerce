@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import formatPrice from "@/util/FormatPrice";
 import { ProductType } from "@/types/ProductType";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Product({
   name,
@@ -21,7 +24,11 @@ export default function Product({
         query: { name, image, unit_amount, queryId, description, features },
       }}
     >
-      <div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
         <Image
           src={image}
           alt={name}
@@ -36,7 +43,7 @@ export default function Product({
             {unit_amount ? formatPrice(unit_amount) : "Free!"}
           </h2>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 }
