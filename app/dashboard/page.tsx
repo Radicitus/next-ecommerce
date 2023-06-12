@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { OrderType } from "@/types/OrderType";
+import { router } from "next/client";
 
 export default function Dashboard() {
   const [orders, setOrders] = useState<OrderType[]>([]);
@@ -13,6 +14,9 @@ export default function Dashboard() {
 
   const fetchOrders = async () => {
     const res = await fetch("/api/get-orders");
+    if (res.status === 403) {
+      return router.push("/api/auth/signin");
+    }
     return await res.json();
   };
 
