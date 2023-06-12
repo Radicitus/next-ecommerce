@@ -1,11 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import { SearchParamType } from "@/types/SearchParamType";
 import formatPrice from "@/util/FormatPrice";
 import AddCart from "@/app/product/[id]/AddCart";
+import { motion } from "framer-motion";
 
 export default async function Product({ searchParams }: SearchParamType) {
   return (
-    <div className="flex flex-col 2xl:flex-row items-center justify-center gap-16 md:gap-x-48 pb-10">
+    <motion.div
+      className="flex flex-col 2xl:flex-row items-center justify-center gap-16 md:gap-x-48 pb-10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3 }}
+    >
       <Image
         src={searchParams.image}
         alt={searchParams.name}
@@ -33,6 +41,6 @@ export default async function Product({ searchParams }: SearchParamType) {
           unit_amount={searchParams.unit_amount}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
