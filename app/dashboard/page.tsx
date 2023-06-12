@@ -28,8 +28,6 @@ export default function Dashboard() {
       });
   }, []);
 
-  console.log(orders);
-
   if (loading)
     return (
       <div className="h-full flex justify-center content-center">
@@ -46,8 +44,8 @@ export default function Dashboard() {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="rounded-lg p-8 my-4 space-y-2 bg-base-200 hover:scale-105 hover:shadow-xl
-            transition duration-300 ease-in-out"
+            className="rounded-lg p-8 my-4 space-y-2 bg-base-200 sm:hover:scale-105 sm:hover:shadow-xl
+            transition duration-100 ease-in-out"
           >
             <h2 className="text-xs font-medium">Order reference: {order.id}</h2>
             <p className="text-xs">
@@ -64,26 +62,27 @@ export default function Dashboard() {
             <p className="text-xs">
               Order Date: {new Date(order.createdAt).toDateString()}
             </p>
-            <div className="text-sm md:flex items-center gap-4">
+            <div className="text-sm flex flex-wrap gap-4 justify-center lg:justify-start">
               {order.products.map((product) => (
-                <div className="py-2" key={product.id}>
+                <div
+                  className="py-2 flex flex-col gap-1 md:gap-3 items-center"
+                  key={product.id}
+                >
                   <h2 className="py-2">{product.name}</h2>
-                  <div className="flex items-baseline gap-4">
-                    <Image
-                      src={product.image!}
-                      width={36}
-                      height={36}
-                      alt={product.name}
-                      priority={true}
-                      className="w-auto rounded-md"
-                    />
-                    <p>
-                      {product.unit_amount
-                        ? formatPrice(product.unit_amount)
-                        : "$0.00"}
-                    </p>
-                    <p>Quantity: {product.quantity}</p>
-                  </div>
+                  <Image
+                    src={product.image!}
+                    width={96}
+                    height={96}
+                    alt={product.name}
+                    priority={true}
+                    className="w-16 h-24 object-cover rounded-md"
+                  />
+                  <p>
+                    {product.unit_amount
+                      ? formatPrice(product.unit_amount)
+                      : "$0.00"}
+                  </p>
+                  <p>Quantity: {product.quantity}</p>
                 </div>
               ))}
             </div>
