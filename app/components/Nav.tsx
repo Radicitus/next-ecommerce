@@ -62,14 +62,17 @@ export default function Nav() {
         {session?.user && (
           <li>
             <div className="dropdown dropdown-end dropdown-hover">
-              <Image
-                src={session.user.image as string}
-                alt={session.user.name as string}
-                width={48}
-                height={48}
-                className="rounded-full"
-                tabIndex={0}
-              />
+              <div className="avatar">
+                <Image
+                  src={session.user.image as string}
+                  alt={session.user.name as string}
+                  width={48}
+                  height={48}
+                  className="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+                  tabIndex={0}
+                />
+              </div>
+
               <ul
                 tabIndex={0}
                 className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-32"
