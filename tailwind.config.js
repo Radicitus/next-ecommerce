@@ -7,8 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      gridTemplateColumns: {
-        fluid: "repeat(auto-fit, minmax(12rem, 1fr))",
+      spacing: {
+        104: "26rem",
+        112: "28rem",
+        120: "30rem",
+        128: "32rem",
       },
       fontFamily: {
         lobster: ["var(--font-lobster)"],

@@ -5,6 +5,7 @@ import formatPrice from "@/util/FormatPrice";
 import { ProductType } from "@/types/ProductType";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import AddCart from "@/app/product/[id]/AddCart";
 
 export default function Product({
   name,
@@ -28,20 +29,40 @@ export default function Product({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
+        className="flex-auto card w-80 h-120 bg-base-100 shadow-xl
+        hover:scale-105 transition duration-300 ease-in-out"
       >
-        <Image
-          src={image}
-          alt={name}
-          width={800}
-          height={800}
-          className="w-full h-96 object-cover rounded-lg"
-          priority={true}
-        ></Image>
-        <div className="font-medium">
-          <h1>{name}</h1>
-          <h2 className="text-sm text-primary">
+        <figure>
+          <Image
+            src={image}
+            alt={name}
+            width={800}
+            height={800}
+            className="rounded-lg"
+            priority={true}
+          />
+        </figure>
+
+        <div className="card-body">
+          <h2 className="card-title">{name}</h2>
+          <h3 className="text-sm text-primary">
             {unit_amount ? formatPrice(unit_amount) : "Free!"}
-          </h2>
+          </h3>
+          <p>{description}</p>
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              e.nativeEvent.preventDefault();
+            }}
+            className="card-actions justify-end flex flex-row"
+          >
+            <AddCart
+              name={name}
+              image={image}
+              id={queryId}
+              unit_amount={unit_amount}
+            />
+          </div>
         </div>
       </motion.div>
     </Link>
