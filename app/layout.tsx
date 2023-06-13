@@ -37,7 +37,7 @@ export default async function RootLayout({
       </head>
 
       <body
-        className={`mx-4 lg:mx-48 h-full ${roboto.variable} ${lobster.variable}`}
+        className={`mx-4 lg:mx-24 h-full ${roboto.variable} ${lobster.variable}`}
       >
         <Hydrate>
           <Nav />
