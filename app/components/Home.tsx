@@ -32,26 +32,27 @@ export default function Home() {
     );
 
   return (
-    <div className="flex flex-wrap gap-8 lg:gap-16 pb-12 justify-center">
-      {/* Drawer for cart */}
-      <div className="drawer drawer-end">
-        <input
-          id="my-drawer-4"
-          type="checkbox"
-          className="drawer-toggle"
-          checked={cartStore.isOpen}
-        />
-        <div className="drawer-content">
-          {products.map((product) => (
-            <Product {...product} key={product.id} />
-          ))}
-        </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-            <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
-          </ul>
-        </div>
+    <div className="drawer drawer-end">
+      <input
+        id="my-drawer-4"
+        type="checkbox"
+        className="drawer-toggle"
+        checked={cartStore.isOpen}
+      />
+      <div className="drawer-content flex flex-wrap gap-8 lg:gap-16 pb-12 justify-center">
+        {products.map((product) => (
+          <Product {...product} key={product.id} />
+        ))}
+      </div>
+      <div className="drawer-side">
+        <label
+          htmlFor="my-drawer-4"
+          className="drawer-overlay"
+          onClick={() => cartStore.toggleCart()}
+        ></label>
+        <ul className="menu w-104 h-full bg-base-100 text-base-content">
+          <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
+        </ul>
       </div>
     </div>
   );
