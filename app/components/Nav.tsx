@@ -60,7 +60,7 @@ export default function Nav() {
         {/* If the user is signed in */}
         {session?.user && (
           <li>
-            <div className="dropdown dropdown-end dropdown-hover">
+            <div className="dropdown dropdown-left dropdown-hover">
               <div className="avatar">
                 <Image
                   src={session.user.image as string}
@@ -74,10 +74,10 @@ export default function Nav() {
 
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-32"
+                className="dropdown-content menu space-y-4 shadow bg-base-100 rounded-box w-32"
               >
                 <Link
-                  className="hover:bg-base-300 p-4 rounded-md font-semibold"
+                  className="hover:bg-base-300 p-2 rounded-md font-semibold"
                   href={"/dashboard"}
                   onClick={() => {
                     if (document.activeElement instanceof HTMLElement) {
@@ -88,7 +88,7 @@ export default function Nav() {
                   Orders
                 </Link>
                 <li
-                  className="hover:bg-base-300 p-4 rounded-md font-semibold cursor-pointer"
+                  className="hover:bg-base-300 p-2 rounded-md font-semibold cursor-pointer"
                   onClick={() => {
                     signOut();
                     if (document.activeElement instanceof HTMLElement) {
