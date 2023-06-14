@@ -8,11 +8,10 @@ import ShoppingBasket from "@/public/shopping-basket.png";
 import { AnimatePresence, motion } from "framer-motion";
 import Checkout from "@/app/components/Checkout";
 import OrderConfirmed from "@/app/components/OrderConfirmed";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Cart() {
   const cartStore = useCartStore();
-  const body = document.body;
 
   // Calculate total price of all items in cart
   const totalPrice = cartStore.cart.reduce((acc, item) => {
@@ -27,15 +26,6 @@ export default function Cart() {
       setProcessing(false);
     }, 800);
   };
-
-  useEffect(() => {
-    // Hide overflow when cart is open to prevent body scrolling
-    if (cartStore.isOpen) {
-      body.style.overflow = "hidden";
-    } else {
-      body.style.overflow = "auto";
-    }
-  }, [cartStore.isOpen]);
 
   return (
     <motion.div

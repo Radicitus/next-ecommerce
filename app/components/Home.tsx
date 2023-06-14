@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { ProductType } from "@/types/ProductType";
 import Product from "@/app/components/Product";
 import Cart from "@/app/components/Cart";
-import { AnimatePresence } from "framer-motion";
 import { useCartStore } from "@/store";
 
 const fetchProducts = async () => {
@@ -23,6 +22,15 @@ export default function Home() {
       setLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    // Hide overflow when cart is open to prevent body scrolling
+    if (cartStore.isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [cartStore.isOpen]);
 
   if (loading)
     return (
@@ -50,8 +58,8 @@ export default function Home() {
           className="drawer-overlay"
           onClick={() => cartStore.toggleCart()}
         ></label>
-        <ul className="menu w-104 h-full bg-base-100 text-base-content">
-          <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
+        <ul className="menu w-full md:w-104 h-full bg-base-100 text-base-content p-0">
+          {cartStore.isOpen && <Cart />}
         </ul>
       </div>
     </div>
