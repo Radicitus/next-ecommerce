@@ -29,11 +29,7 @@ export default function Cart() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
       layout
-      onClick={(e) => e.stopPropagation()}
       className="bg-base-100 h-screen w-full overflow-y-scroll p-8"
     >
       {/* Render different button depending on onCheckout state */}
@@ -63,9 +59,7 @@ export default function Cart() {
             <motion.div
               layout
               key={item.id}
-              className="flex p-4 my-4 gap-4 bg-base-200 rounded-lg
-                md:hover:bg-primary-content md:hover:shadow-2xl md:hover:text-primary
-                transition duration-300 ease-in-out"
+              className="flex p-4 my-4 gap-4 bg-base-200 rounded-lg hover:bg-base-100 transition duration-300 ease-in-out"
             >
               <Image
                 className="rounded-md h-3/5 object-cover"

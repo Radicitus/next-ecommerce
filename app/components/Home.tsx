@@ -46,6 +46,7 @@ export default function Home() {
         type="checkbox"
         className="drawer-toggle"
         checked={cartStore.isOpen}
+        onChange={(e) => {}}
       />
       <div className="drawer-content flex flex-wrap gap-8 lg:gap-16 pb-12 justify-center">
         {products.map((product) => (
