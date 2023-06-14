@@ -2,6 +2,7 @@ import "./globals.css";
 import Nav from "@/app/components/Nav";
 import Hydrate from "@/app/components/Hydrate";
 import { Roboto, Lobster_Two } from "next/font/google";
+import Footer from "@/app/components/Footer";
 
 // Define fonts
 const roboto = Roboto({
@@ -26,23 +27,22 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      data-theme="light"
-      className="h-full transition duration-700"
-    >
+    <html lang="en" data-theme="light" className="transition duration-700">
       <head>
         <link rel="icon" href="/favicon.ico" />
         <title>Cam.Shop</title>
       </head>
 
       <body
-        className={`mx-4 lg:mx-24 h-full ${roboto.variable} ${lobster.variable}`}
+        className={`flex flex-col justify-between h-screen ${roboto.variable} ${lobster.variable}`}
       >
-        <Hydrate>
-          <Nav />
-          {children}
-        </Hydrate>
+        <div className="mx-4 lg:mx-24 mb-auto">
+          <Hydrate>
+            <Nav />
+            {children}
+          </Hydrate>
+        </div>
+        <Footer />
       </body>
     </html>
   );
