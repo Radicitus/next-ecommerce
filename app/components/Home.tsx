@@ -34,7 +34,7 @@ export default function Home() {
 
   if (loading)
     return (
-      <div className="h-full flex justify-center content-center">
+      <div className="h-full flex justify-center content-center absolute inset-0">
         <span className="loading loading-ring loading-lg"></span>
       </div>
     );
