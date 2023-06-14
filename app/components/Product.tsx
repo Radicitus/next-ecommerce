@@ -29,7 +29,7 @@ export default function Product({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="flex-auto card w-80 h-120 bg-base-100 shadow-xl
+        className="card w-80 h-120 bg-base-100 shadow-xl
         hover:scale-105 transition hover:duration-300 ease-in-out"
       >
         <figure>
