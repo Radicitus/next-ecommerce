@@ -3,7 +3,6 @@
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import Cart from "@/app/components/Cart";
 import { useCartStore } from "@/store";
 import { AiFillShopping } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
@@ -104,7 +103,6 @@ export default function Nav() {
           </li>
         )}
       </ul>
-      <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
     </motion.nav>
   );
 }
