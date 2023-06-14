@@ -59,7 +59,7 @@ export default function Cart() {
             <motion.div
               layout
               key={item.id}
-              className="flex p-4 my-4 gap-4 bg-base-200 rounded-lg hover:bg-base-100 transition duration-300 ease-in-out"
+              className="flex p-4 my-4 gap-4 bg-base-200 rounded-lg"
             >
               <Image
                 className="rounded-md h-3/5 object-cover"
