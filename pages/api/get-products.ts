@@ -1,13 +1,17 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 
-export default async function getProducts() {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-    apiVersion: "2022-11-15",
-  });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  apiVersion: "2022-11-15",
+});
 
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const products = await stripe.products.list();
 
-  return await Promise.all(
+  const completeProducts = await Promise.all(
     products.data.map(async (product) => {
       const prices = await stripe.prices.list({
         product: product.id,
@@ -25,4 +29,6 @@ export default async function getProducts() {
       };
     })
   );
+
+  res.status(200).json(completeProducts);
 }

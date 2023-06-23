@@ -3,7 +3,6 @@
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import Cart from "@/app/components/Cart";
 import { useCartStore } from "@/store";
 import { AiFillShopping } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
@@ -61,21 +60,24 @@ export default function Nav() {
         {/* If the user is signed in */}
         {session?.user && (
           <li>
-            <div className="dropdown dropdown-end dropdown-hover">
-              <Image
-                src={session.user.image as string}
-                alt={session.user.name as string}
-                width={48}
-                height={48}
-                className="rounded-full"
-                tabIndex={0}
-              />
+            <div className="dropdown dropdown-left dropdown-hover">
+              <div className="avatar">
+                <Image
+                  src={session.user.image as string}
+                  alt={session.user.name as string}
+                  width={48}
+                  height={48}
+                  className="rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+                  tabIndex={0}
+                />
+              </div>
+
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-32"
+                className="dropdown-content menu space-y-4 shadow bg-base-100 rounded-box w-32"
               >
                 <Link
-                  className="hover:bg-base-300 p-4 rounded-md font-semibold"
+                  className="hover:bg-base-300 p-2 rounded-md font-semibold"
                   href={"/dashboard"}
                   onClick={() => {
                     if (document.activeElement instanceof HTMLElement) {
@@ -86,7 +88,7 @@ export default function Nav() {
                   Orders
                 </Link>
                 <li
-                  className="hover:bg-base-300 p-4 rounded-md font-semibold cursor-pointer"
+                  className="hover:bg-base-300 p-2 rounded-md font-semibold cursor-pointer"
                   onClick={() => {
                     signOut();
                     if (document.activeElement instanceof HTMLElement) {
@@ -101,7 +103,6 @@ export default function Nav() {
           </li>
         )}
       </ul>
-      <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
     </motion.nav>
   );
 }

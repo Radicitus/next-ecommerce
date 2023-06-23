@@ -1,14 +1,10 @@
-import Product from "@/app/components/Product";
 import { Analytics } from "@vercel/analytics/react";
-import getProducts from "@/util/GetProducts";
+import Home from "@/app/components/Home";
 
-export default async function Home() {
-  const products = await getProducts();
+export default async function Main() {
   return (
-    <main className="grid grid-cols-fluid gap-16 pb-12">
-      {products.map((product) => (
-        <Product {...product} key={product.id} />
-      ))}
+    <main>
+      <Home />
       <Analytics />
     </main>
   );
