@@ -34,9 +34,9 @@ export default async function RootLayout({
       </head>
 
       <body
-        className={`flex flex-col justify-between h-screen ${roboto.variable} ${lobster.variable}`}
+        className={`flex flex-col min-h-screen ${roboto.variable} ${lobster.variable}`}
       >
-        <div className="mx-4 lg:mx-24 mb-auto">
+        <div className="mx-4 lg:mx-24">
           <Hydrate>
             <Nav />
             {children}

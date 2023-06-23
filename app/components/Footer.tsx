@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="footer footer-center p-5 bg-primary text-primary-content">
+    <footer className="footer footer-center p-5 bg-primary text-primary-content mt-auto">
       <div>
         <Image
           src={"https://i.imgur.com/hvUhi1n.png"}
