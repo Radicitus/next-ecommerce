@@ -11,11 +11,11 @@ import { useSession } from "next-auth/react";
 
 export default function Nav() {
   const cartStore = useCartStore();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   return (
     <motion.nav
-      className="flex justify-between items-center py-12"
+      className="flex justify-between items-center my-12 px-4 py-3 rounded-3xl shadow-lg"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.3 }}
