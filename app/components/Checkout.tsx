@@ -6,7 +6,7 @@ import { useCartStore } from "@/store";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import CheckoutForm from "@/app/components/CheckoutForm";
-import OrderAnimation from "@/app/components/OrderAnimation";
+import OrderAnimation from "@/app/components/LottieAnimations/OrderAnimation";
 import { motion } from "framer-motion";
 import { useThemeStore } from "@/store";
 

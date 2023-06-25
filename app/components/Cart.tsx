@@ -4,11 +4,11 @@ import Image from "next/image";
 import { useCartStore } from "@/store";
 import formatPrice from "@/util/FormatPrice";
 import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
-import ShoppingBasket from "@/public/shopping-basket.png";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Checkout from "@/app/components/Checkout";
 import OrderConfirmed from "@/app/components/OrderConfirmed";
 import { useState } from "react";
+import EmptyCartAnimation from "@/app/components/LottieAnimations/EmptyCartAnimation";
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -124,22 +124,7 @@ export default function Cart() {
             </motion.div>
           ) : (
             //   If the cart is empty
-            <AnimatePresence>
-              <motion.div
-                animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
-                initial={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
-                exit={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
-                className="flex flex-col items-center gap-12 text-2xl font-medium pt-36 opacity-75"
-              >
-                <h1>Nothing to see here...</h1>
-                <Image
-                  src={ShoppingBasket}
-                  alt="empty cart"
-                  width={200}
-                  height={200}
-                />
-              </motion.div>
-            </AnimatePresence>
+            <EmptyCartAnimation />
           )}
         </>
       )}
