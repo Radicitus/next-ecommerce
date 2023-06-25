@@ -1,8 +1,8 @@
 import "./globals.css";
-import Nav from "@/app/components/Nav";
-import Hydrate from "@/app/components/Hydrate";
+import Nav from "@/app/components/Static/Nav";
+import Hydrate from "@/app/components/Util/Hydrate";
 import { Roboto, Lobster_Two } from "next/font/google";
-import Footer from "@/app/components/Footer";
+import Footer from "@/app/components/Static/Footer";
 
 // Define fonts
 const roboto = Roboto({

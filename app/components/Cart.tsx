@@ -5,8 +5,8 @@ import { useCartStore } from "@/store";
 import formatPrice from "@/util/FormatPrice";
 import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
 import { motion } from "framer-motion";
-import Checkout from "@/app/components/Checkout";
-import OrderConfirmed from "@/app/components/OrderConfirmed";
+import Checkout from "@/app/components/Checkout/Checkout";
+import OrderConfirmed from "@/app/components/Checkout/OrderConfirmed";
 import { useState } from "react";
 import EmptyCartAnimation from "@/app/components/LottieAnimations/EmptyCartAnimation";
 

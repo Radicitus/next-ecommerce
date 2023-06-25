@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCartStore } from "@/store";
 import { AiFillShopping } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
-import DarkLight from "@/app/components/DarkLight";
+import DarkLight from "@/app/components/Static/DarkLight";
 import { useSession } from "next-auth/react";
 
 export default function Nav() {
